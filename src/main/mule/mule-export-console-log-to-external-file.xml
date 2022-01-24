@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd"></mule>
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="744f9b04-8b71-4768-a43d-1ec282d129f4" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="mule-export-console-log-to-external-fileFlow" doc:id="7a0ecd7a-fb11-4f9d-b289-e02567e57051" >
+		<http:listener doc:name="Listener" doc:id="722b3f09-593f-4e6c-b5f6-ee06b23fa654" config-ref="HTTP_Listener_config" path="/testLog"/>
+		<logger level="INFO" doc:name="Logger" doc:id="7dd014f9-bfbe-4f2e-a191-f528401ed6c7" message='#["Testing log output"]'/>
+	</flow>
+</mule>
